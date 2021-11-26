@@ -1,0 +1,289 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Coronastatistik.R},
+  pdfauthor={cswyon},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Coronastatistik.R}
+\author{cswyon}
+\date{2021-01-15}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"readxl"}\NormalTok{, }\DataTypeTok{repos=}\StringTok{"http://cran.r-project.org/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Installing package into '/Users/cswyon/Library/R/4.0/library'
+## (as 'lib' is unspecified)
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## The downloaded binary packages are in
+##  /var/folders/b2/ph0bllf14lz3x2ylgdc2k_vw0000gn/T//RtmpTkSd3I/downloaded_packages
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{'tinytex'}\NormalTok{, }\DataTypeTok{repos=}\StringTok{"http://cran.r-project.org/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Installing package into '/Users/cswyon/Library/R/4.0/library'
+## (as 'lib' is unspecified)
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## The downloaded binary packages are in
+##  /var/folders/b2/ph0bllf14lz3x2ylgdc2k_vw0000gn/T//RtmpTkSd3I/downloaded_packages
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tinytex}\OperatorTok{::}\KeywordTok{install_tinytex}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## The directory /usr/local/bin is not writable. I recommend that you make it writable. See https://github.com/yihui/tinytex/issues/24 for more info.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tinytex)}
+\KeywordTok{library}\NormalTok{(readxl)}
+
+\CommentTok{#Excel-Daten importieren}
+\NormalTok{data_xls =}\StringTok{ }\KeywordTok{read_excel}\NormalTok{(}\StringTok{"Sterbefällenvergleich 2016-2020 nach Tagen.xlsx"}\NormalTok{, }\DataTypeTok{na=}\StringTok{"Na"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## New names:
+## * `` -> ...1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data2_xls =}\StringTok{ }\KeywordTok{read_excel}\NormalTok{(}\StringTok{"D - Überblick.xlsx"}\NormalTok{, }\DataTypeTok{na=}\StringTok{"Na"}\NormalTok{)}
+\NormalTok{d_}\DecValTok{2020}\NormalTok{=data_xls[[}\DecValTok{2}\NormalTok{]][}\DecValTok{73}\OperatorTok{:}\DecValTok{355}\NormalTok{]}
+\NormalTok{d_}\DecValTok{2019}\NormalTok{=data_xls[[}\DecValTok{3}\NormalTok{]][}\DecValTok{73}\OperatorTok{:}\DecValTok{355}\NormalTok{]}
+\NormalTok{d_}\DecValTok{2018}\NormalTok{=data_xls[[}\DecValTok{4}\NormalTok{]][}\DecValTok{73}\OperatorTok{:}\DecValTok{355}\NormalTok{]}
+\NormalTok{d_}\DecValTok{2017}\NormalTok{=data_xls[[}\DecValTok{5}\NormalTok{]][}\DecValTok{73}\OperatorTok{:}\DecValTok{355}\NormalTok{]}
+
+
+\CommentTok{#Daten von }
+\NormalTok{farbe=}\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"black"}\NormalTok{,}\StringTok{"darkgrey"}\NormalTok{,}\StringTok{"grey"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(d_}\DecValTok{2020}\NormalTok{,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{"Tage vom 13.03 bis 22.12"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"Sterbefälle"}\NormalTok{,}\DataTypeTok{col=}\NormalTok{farbe[}\DecValTok{1}\NormalTok{],}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{1500}\NormalTok{,}\DecValTok{4000}\NormalTok{),}\DataTypeTok{main=}\StringTok{"Sterbefällevergleich in 2017-2020 und deren Durchschnitte"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(d_}\DecValTok{2019}\NormalTok{,}\DataTypeTok{col=}\NormalTok{farbe[}\DecValTok{2}\NormalTok{])}
+\KeywordTok{lines}\NormalTok{(d_}\DecValTok{2018}\NormalTok{,}\DataTypeTok{col=}\NormalTok{farbe[}\DecValTok{3}\NormalTok{])}
+\KeywordTok{lines}\NormalTok{(d_}\DecValTok{2017}\NormalTok{,}\DataTypeTok{col=}\NormalTok{farbe[}\DecValTok{4}\NormalTok{])}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\KeywordTok{expression}\NormalTok{(}\DecValTok{2020}\NormalTok{),}\KeywordTok{expression}\NormalTok{(}\DecValTok{2019}\NormalTok{),}\KeywordTok{expression}\NormalTok{(}\DecValTok{2018}\NormalTok{),}\KeywordTok{expression}\NormalTok{(}\DecValTok{2017}\NormalTok{)),}\DataTypeTok{lty=}\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DecValTok{2}\NormalTok{),}\DataTypeTok{col=}\NormalTok{farbe,}\DataTypeTok{cex=}\FloatTok{0.8}\NormalTok{)}
+
+\NormalTok{m_}\DecValTok{2020}\NormalTok{=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{mean}\NormalTok{(d_}\DecValTok{2020}\NormalTok{),}\KeywordTok{length}\NormalTok{(d_}\DecValTok{2020}\NormalTok{))}
+\NormalTok{m_}\DecValTok{2019}\NormalTok{=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(d_}\DecValTok{2019}\NormalTok{)),}\KeywordTok{length}\NormalTok{(d_}\DecValTok{2019}\NormalTok{))}
+\NormalTok{m_}\DecValTok{2018}\NormalTok{=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(d_}\DecValTok{2018}\NormalTok{)),}\KeywordTok{length}\NormalTok{(d_}\DecValTok{2018}\NormalTok{))}
+\NormalTok{m_}\DecValTok{2017}\NormalTok{=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(d_}\DecValTok{2017}\NormalTok{)),}\KeywordTok{length}\NormalTok{(d_}\DecValTok{2017}\NormalTok{))}
+\KeywordTok{lines}\NormalTok{(m_}\DecValTok{2020}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(m_}\DecValTok{2019}\NormalTok{,}\DataTypeTok{col=}\StringTok{"black"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(m_}\DecValTok{2018}\NormalTok{,}\DataTypeTok{col=}\StringTok{"darkgrey"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(m_}\DecValTok{2017}\NormalTok{,}\DataTypeTok{col=}\StringTok{"grey"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Coronastatistik_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{c_}\DecValTok{2020}\NormalTok{=data2_xls[[}\DecValTok{4}\NormalTok{]][}\DecValTok{2}\OperatorTok{:}\DecValTok{284}\NormalTok{]}
+\NormalTok{c_}\DecValTok{2020}\NormalTok{[}\DecValTok{4}\NormalTok{]=}\DecValTok{13}
+\NormalTok{c_}\DecValTok{2020}\NormalTok{[}\DecValTok{5}\NormalTok{]=}\DecValTok{13}
+\NormalTok{c_}\DecValTok{2020}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] "8"     "12"    "13"    "13"    "13"    "20"    "31"    "46"    "55"   
+##  [10] "86"    "114"   "149"   "198"   "253"   "325"   "389"   "455"   "583"  
+##  [19] "732"   "872"   "1017"  "1158"  "1342"  "1434"  "1607"  "1861"  "2107" 
+##  [28] "2373"  "2544"  "2673"  "2799"  "2969"  "3254"  "3569"  "3868"  "4110" 
+##  [37] "4294"  "4404"  "4598"  "4879"  "5094"  "5321"  "5500"  "5640"  "5750" 
+##  [46] "5913"  "6115"  "6288"  "6481"  "6575"  "6649"  "6692"  "6831"  "6996" 
+##  [55] "7119"  "7266"  "7369"  "7395"  "7417"  "7533"  "7634"  "7723"  "7824" 
+##  [64] "7881"  "7914"  "7935"  "8007"  "8090"  "8147"  "8174"  "8216"  "8247" 
+##  [73] "8257"  "8302"  "8349"  "8411"  "8450"  "8489"  "8500"  "8511"  "8522" 
+##  [82] "8551"  "8581"  "8613"  "8646"  "8668"  "8674"  "8711"  "8729"  "8755" 
+##  [91] "8763"  "8781"  "8787"  "8791"  "8800"  "8830"  "8856"  "8872"  "8883" 
+## [100] "8882"  "8885"  "8895"  "8914"  "8927"  "8948"  "8954"  "8957"  "8961" 
+## [109] "8973"  "8985"  "8994"  "9003"  "9008"  "9012"  "9016"  "9024"  "9036" 
+## [118] "9048"  "9054"  "9060"  "9063"  "9064"  "9068"  "9071"  "9078"  "9082" 
+## [127] "9083"  "9084"  "9086"  "9090"  "9095"  "9101"  "9111"  "9118"  "9118" 
+## [136] "9118"  "9122"  "9128"  "9134"  "9141"  "9148"  "9141"  "9148"  "9156" 
+## [145] "9168"  "9175"  "9183"  "9195"  "9196"  "9197"  "9201"  "9207"  "9211" 
+## [154] "9225"  "9231"  "9231"  "9232"  "9236"  "9243"  "9253"  "9260"  "9267" 
+## [163] "9269"  "9272"  "9277"  "9280"  "9285"  "9288"  "9289"  "9295"  "9298" 
+## [172] "9302"  "9313"  "9321"  "9322"  "9324"  "9325"  "9325"  "9329"  "9338" 
+## [181] "9341"  "9342"  "9347"  "9349"  "9350"  "9362"  "9368"  "9371"  "9378" 
+## [190] "9384"  "9386"  "9386"  "9396"  "9409"  "9428"  "9443"  "9452"  "9457" 
+## [199] "9460"  "9471"  "9488"  "9500"  "9508"  "9527"  "9529"  "9534"  "9546" 
+## [208] "9562"  "9578"  "9589"  "9604"  "9615"  "9621"  "9634"  "9677"  "9710" 
+## [217] "9734"  "9767"  "9777"  "9789"  "9836"  "9875"  "9905"  "9954"  "10003"
+## [226] "10032" "10056" "10098" "10183" "10272" "10349" "10452" "10481" "10530"
+## [235] "10661" "10812" "10930" "11096" "11226" "11289" "11352" "11506" "11767"
+## [244] "11982" "12200" "12378" "12485" "12547" "12814" "13119" "13370" "13630"
+## [253] "13884" "14022" "14112" "14361" "14771" "15160" "15586" "15965" "16123"
+## [262] "16248" "16636" "17123" "17602" "18034" "18517" "18772" "18919" "19342"
+## [271] "19932" "20372" "20970" "21466" "21787" "21975" "22475" "23427" "24125"
+## [280] "24938" "25640" "26049" "26275"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Gesamtzahl als Fall jeweiliger Tage umstellen}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{281}\NormalTok{)\{}
+\NormalTok{  c_}\DecValTok{2020}\NormalTok{[}\DecValTok{283}\OperatorTok{-}\NormalTok{i]=}\KeywordTok{as.numeric}\NormalTok{(c_}\DecValTok{2020}\NormalTok{[}\DecValTok{283}\OperatorTok{-}\NormalTok{i])}\OperatorTok{-}\KeywordTok{as.numeric}\NormalTok{(c_}\DecValTok{2020}\NormalTok{[}\DecValTok{282}\OperatorTok{-}\NormalTok{i])}
+\NormalTok{\}}
+\NormalTok{c_}\DecValTok{2020}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] "8"   "4"   "1"   "0"   "0"   "7"   "11"  "15"  "9"   "31"  "28"  "35" 
+##  [13] "49"  "55"  "72"  "64"  "66"  "128" "149" "140" "145" "141" "184" "92" 
+##  [25] "173" "254" "246" "266" "171" "129" "126" "170" "285" "315" "299" "242"
+##  [37] "184" "110" "194" "281" "215" "227" "179" "140" "110" "163" "202" "173"
+##  [49] "193" "94"  "74"  "43"  "139" "165" "123" "147" "103" "26"  "22"  "116"
+##  [61] "101" "89"  "101" "57"  "33"  "21"  "72"  "83"  "57"  "27"  "42"  "31" 
+##  [73] "10"  "45"  "47"  "62"  "39"  "39"  "11"  "11"  "11"  "29"  "30"  "32" 
+##  [85] "33"  "22"  "6"   "37"  "18"  "26"  "8"   "18"  "6"   "4"   "9"   "30" 
+##  [97] "26"  "16"  "11"  "-1"  "3"   "10"  "19"  "13"  "21"  "6"   "3"   "4"  
+## [109] "12"  "12"  "9"   "9"   "5"   "4"   "4"   "8"   "12"  "12"  "6"   "6"  
+## [121] "3"   "1"   "4"   "3"   "7"   "4"   "1"   "1"   "2"   "4"   "5"   "6"  
+## [133] "10"  "7"   "0"   "0"   "4"   "6"   "6"   "7"   "7"   "-7"  "7"   "8"  
+## [145] "12"  "7"   "8"   "12"  "1"   "1"   "4"   "6"   "4"   "14"  "6"   "0"  
+## [157] "1"   "4"   "7"   "10"  "7"   "7"   "2"   "3"   "5"   "3"   "5"   "3"  
+## [169] "1"   "6"   "3"   "4"   "11"  "8"   "1"   "2"   "1"   "0"   "4"   "9"  
+## [181] "3"   "1"   "5"   "2"   "1"   "12"  "6"   "3"   "7"   "6"   "2"   "0"  
+## [193] "10"  "13"  "19"  "15"  "9"   "5"   "3"   "11"  "17"  "12"  "8"   "19" 
+## [205] "2"   "5"   "12"  "16"  "16"  "11"  "15"  "11"  "6"   "13"  "43"  "33" 
+## [217] "24"  "33"  "10"  "12"  "47"  "39"  "30"  "49"  "49"  "29"  "24"  "42" 
+## [229] "85"  "89"  "77"  "103" "29"  "49"  "131" "151" "118" "166" "130" "63" 
+## [241] "63"  "154" "261" "215" "218" "178" "107" "62"  "267" "305" "251" "260"
+## [253] "254" "138" "90"  "249" "410" "389" "426" "379" "158" "125" "388" "487"
+## [265] "479" "432" "483" "255" "147" "423" "590" "440" "598" "496" "321" "188"
+## [277] "500" "952" "698" "813" "702" "409" "226"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Plot erstellen}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(c_}\DecValTok{2020}\NormalTok{)}\OperatorTok{/}\KeywordTok{as.numeric}\NormalTok{(d_}\DecValTok{2020}\NormalTok{)}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{"Tage 13.03-20.12"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"Prozent(%)"}\NormalTok{,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{main=}\StringTok{"Verhalten Coronabedingte Sterbefälle/Gesamtfälle"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Coronastatistik_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+\end{document}
